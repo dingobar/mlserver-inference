@@ -2,7 +2,7 @@ from pathlib import Path
 from typing import Sequence
 from mlserver_inference_pipeline.destinations.base import AbstractPredictionDestination
 from pydantic import BaseSettings
-from mlserver_inference_pipeline.models import Prediction
+from mlserver_inference_pipeline.models import PredictionRecord
 import csv
 
 
@@ -17,7 +17,7 @@ class CsvPredictionDestination(AbstractPredictionDestination):
     def __init__(self) -> None:
         self.config = CsvPredictionDestinationConfig()
 
-    def write(self, predictions: Sequence[Prediction]) -> None:
+    def write(self, predictions: Sequence[PredictionRecord]) -> None:
         with open(self.config.outpath, "w") as f:
             writer = csv.DictWriter(f, predictions[0].dict().keys())
             writer.writeheader()

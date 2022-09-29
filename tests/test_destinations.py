@@ -2,7 +2,7 @@ from pathlib import Path
 from random import uniform
 import mlserver_inference_pipeline.predict as predict
 import pytest
-from mlserver_inference_pipeline.models import FeatureRecord, Prediction
+from mlserver_inference_pipeline.models import FeatureRecord, PredictionRecord
 from mlserver_inference_pipeline.destinations.csv import CsvPredictionDestination
 import tempfile
 
@@ -10,8 +10,8 @@ import tempfile
 @pytest.fixture
 def dummy_prediction_set():
     return [
-        Prediction(
-            input=FeatureRecord(ref=i, features=[1, 2, 3]),
+        PredictionRecord(
+            input_ref=i,
             value=uniform(0, 1),
             model_version="test",
         )
@@ -20,7 +20,7 @@ def dummy_prediction_set():
 
 
 def test_destination_csv(
-    monkeypatch: pytest.MonkeyPatch, dummy_prediction_set: list[Prediction]
+    monkeypatch: pytest.MonkeyPatch, dummy_prediction_set: list[PredictionRecord]
 ):
     with tempfile.TemporaryDirectory() as f:
         output_file = Path(f) / "myfile.csv"
