@@ -3,8 +3,9 @@ from random import choice, uniform
 import random
 import string
 from typing import Hashable
+from uuid import uuid4
 from mlserver_inference_pipeline.extractors.base import AbstractFeatureExtractor
-from mlserver_inference_pipeline.models import FeatureSet
+from mlserver_inference_pipeline.models import FeatureRecord, FeatureSet
 from pydantic import BaseSettings
 
 
@@ -28,9 +29,12 @@ class RandomFeatureExtractor(AbstractFeatureExtractor):
             letters = string.ascii_lowercase
             return "".join(choice(letters) for i in range(length))
 
-        features = [
-            [uniform(0, 1) for _ in range(self.config.n_features)]
+        records = [
+            FeatureRecord(
+                ref=uuid4(),
+                features=[uniform(0, 1) for _ in range(self.config.n_features)],
+            )
             for _ in range(self.config.length)
         ]
         columns = [randomword(10) for _ in range(self.config.n_features)]
-        return FeatureSet(features=features, columns=columns)
+        return FeatureSet(records=records, columns=columns)

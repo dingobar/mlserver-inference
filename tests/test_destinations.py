@@ -2,7 +2,7 @@ from pathlib import Path
 from random import uniform
 import mlserver_inference_pipeline.predict as predict
 import pytest
-from mlserver_inference_pipeline.models import Prediction
+from mlserver_inference_pipeline.models import FeatureRecord, Prediction
 from mlserver_inference_pipeline.destinations.csv import CsvPredictionDestination
 import tempfile
 
@@ -10,7 +10,12 @@ import tempfile
 @pytest.fixture
 def dummy_prediction_set():
     return [
-        Prediction(ref=i, value=uniform(0, 1), model_version="test") for i in range(100)
+        Prediction(
+            input=FeatureRecord(ref=i, features=[1, 2, 3]),
+            value=uniform(0, 1),
+            model_version="test",
+        )
+        for i in range(100)
     ]
 
 

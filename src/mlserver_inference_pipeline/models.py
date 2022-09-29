@@ -6,14 +6,19 @@ from typing import Sequence
 FeatureType = Sequence[float | int]
 
 
+class FeatureRecord(BaseModel):
+    ref: UUID | str | int
+    features: FeatureType
+
+
 class FeatureSet(BaseModel):
-    features: FeatureType | Sequence[FeatureType]
+    records: Sequence[FeatureRecord]
     columns: Sequence[str]
 
 
 class Prediction(BaseModel):
     id: UUID = uuid4()
-    ref: UUID | str | int
+    input: FeatureRecord
     value: Sequence[float | int] | float | int
     model_version: str
     timestamp: datetime = datetime.now(timezone.utc)

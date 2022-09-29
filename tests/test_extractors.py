@@ -8,8 +8,8 @@ def test_extractor_random(monkeypatch: pytest.MonkeyPatch):
     extractor = RandomFeatureExtractor()
     result = extractor.extract()
 
-    assert len(result.features[0]) == 360
+    assert len(result.records[0].features) == 360
     assert len(result.columns) == 360
     # Setting the seed should give reproducible results
-    assert result.features[0][0] == 0.7501699608094758
+    assert result.records[0].features[0] == 0.7501699608094758
     assert result.columns[0] == "henfafsivi"
