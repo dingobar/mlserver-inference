@@ -1,10 +1,12 @@
+import tempfile
 from pathlib import Path
 from random import uniform
-import mlserver_inference_pipeline.predict as predict
+
 import pytest
-from mlserver_inference_pipeline.models import FeatureRecord, PredictionRecord
+
+import mlserver_inference_pipeline.predict as predict
 from mlserver_inference_pipeline.destinations.csv import CsvPredictionDestination
-import tempfile
+from mlserver_inference_pipeline.models import FeatureRecord, PredictionRecord
 
 
 @pytest.fixture

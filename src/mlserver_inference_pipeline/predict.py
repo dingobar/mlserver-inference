@@ -3,16 +3,18 @@ from ast import Str
 from datetime import datetime, timezone
 from random import randint
 from typing import Sequence
+
+import httpx
+
+from mlserver_inference_pipeline.destinations.base import AbstractPredictionDestination
+from mlserver_inference_pipeline.extractors.base import AbstractFeatureExtractor
 from mlserver_inference_pipeline.kserve import KserveDataType
 from mlserver_inference_pipeline.models import (
     FeatureSet,
+    FeatureType,
     KserveInferenceResponse,
     PredictionRecord,
 )
-import httpx
-from mlserver_inference_pipeline.extractors.base import AbstractFeatureExtractor
-from mlserver_inference_pipeline.destinations.base import AbstractPredictionDestination
-from mlserver_inference_pipeline.models import FeatureType
 
 
 class AbstractPredictor(ABC):

@@ -1,7 +1,8 @@
 from datetime import datetime, timezone
-from uuid import UUID, uuid4
-from pydantic import BaseModel
 from typing import Sequence
+from uuid import UUID, uuid4
+
+from pydantic import BaseModel
 
 FeatureType = Sequence[float | int]
 

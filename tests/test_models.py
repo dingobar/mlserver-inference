@@ -1,5 +1,6 @@
-import mlserver_inference_pipeline.models as models
 import pytest
+
+import mlserver_inference_pipeline.models as models
 
 
 @pytest.mark.parametrize(

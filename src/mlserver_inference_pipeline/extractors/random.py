@@ -1,12 +1,14 @@
-from datetime import datetime, timezone
-from random import choice, uniform
 import random
 import string
+from datetime import datetime, timezone
+from random import choice, uniform
 from typing import Hashable
 from uuid import uuid4
+
+from pydantic import BaseSettings
+
 from mlserver_inference_pipeline.extractors.base import AbstractFeatureExtractor
 from mlserver_inference_pipeline.models import FeatureRecord, FeatureSet
-from pydantic import BaseSettings
 
 
 class RandomFeatureExtractorConfig(BaseSettings):

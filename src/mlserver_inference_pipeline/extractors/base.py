@@ -1,7 +1,9 @@
 from abc import ABC, abstractmethod
 from typing import Sequence
-from mlserver_inference_pipeline.models import FeatureSet
+
 from pydantic import BaseSettings
+
+from mlserver_inference_pipeline.models import FeatureSet
 
 
 class AbstractFeatureExtractor(ABC):

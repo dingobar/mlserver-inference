@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Sequence
+
 from mlserver_inference_pipeline.models import PredictionRecord
 
 

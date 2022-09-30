@@ -1,4 +1,5 @@
 import pytest
+
 from mlserver_inference_pipeline.extractors.random import RandomFeatureExtractor
 
 

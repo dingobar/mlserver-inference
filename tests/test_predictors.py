@@ -1,14 +1,14 @@
-from mlserver_inference_pipeline.destinations.console import (
-    ConsolePredictionDestination,
-)
-import pytest
-from respx.router import MockRouter
 from random import uniform
+
+import pytest
 from httpx import Response
-from mlserver_inference_pipeline.extractors.base import AbstractFeatureExtractor
+from respx.router import MockRouter
+
 from mlserver_inference_pipeline.destinations.base import AbstractPredictionDestination
-from mlserver_inference_pipeline.predict import MlserverPredictor
+from mlserver_inference_pipeline.destinations.console import ConsolePredictionDestination
+from mlserver_inference_pipeline.extractors.base import AbstractFeatureExtractor
 from mlserver_inference_pipeline.models import FeatureRecord, FeatureSet
+from mlserver_inference_pipeline.predict import MlserverPredictor
 
 
 class MockExtractor(AbstractFeatureExtractor):
@@ -16,8 +16,7 @@ class MockExtractor(AbstractFeatureExtractor):
         return FeatureSet(
             columns=["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"],
             records=[
-                FeatureRecord(ref=i, features=[uniform(0, 1) for _ in range(10)])
-                for i in range(10)
+                FeatureRecord(ref=i, features=[uniform(0, 1) for _ in range(10)]) for i in range(10)
             ],
         )
 
@@ -50,3 +49,6 @@ def test_mlserver_predictor(
         console_destination,
     )
     predictor.predict()
+
+    assert mock.called
+    assert mock.return_value.status_code == 200

@@ -1,9 +1,11 @@
+import csv
 from pathlib import Path
 from typing import Sequence
-from mlserver_inference_pipeline.destinations.base import AbstractPredictionDestination
+
 from pydantic import BaseSettings
+
+from mlserver_inference_pipeline.destinations.base import AbstractPredictionDestination
 from mlserver_inference_pipeline.models import PredictionRecord
-import csv
 
 
 class CsvPredictionDestinationConfig(BaseSettings):
