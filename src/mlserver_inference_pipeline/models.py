@@ -22,3 +22,17 @@ class PredictionRecord(BaseModel):
     value: Sequence[float | int] | float | int
     model_version: str
     timestamp: datetime = datetime.now(timezone.utc)
+
+
+class KserveInferenceResponseOutput(BaseModel):
+    name: str
+    shape: list[int]
+    datatype: str
+    data: list[float]
+
+
+class KserveInferenceResponse(BaseModel):
+    model_name: str
+    model_version: str
+    id: str
+    outputs: list[KserveInferenceResponseOutput]
