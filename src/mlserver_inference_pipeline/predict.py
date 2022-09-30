@@ -1,7 +1,5 @@
 from abc import ABC, abstractmethod
-from ast import Str
 from datetime import datetime, timezone
-from random import randint
 from typing import Sequence
 
 import httpx
@@ -9,17 +7,12 @@ import httpx
 from mlserver_inference_pipeline.destinations.base import AbstractPredictionDestination
 from mlserver_inference_pipeline.extractors.base import AbstractFeatureExtractor
 from mlserver_inference_pipeline.kserve import KserveDataType
-from mlserver_inference_pipeline.models import (
-    FeatureSet,
-    FeatureType,
-    KserveInferenceResponse,
-    PredictionRecord,
-)
+from mlserver_inference_pipeline.models import FeatureSet, KserveInferenceResponse, PredictionRecord
 
 
 class AbstractPredictor(ABC):
     @abstractmethod
-    def predict(self) -> Sequence[PredictionRecord]:
+    def predict(self) -> None:
         pass
 
 
@@ -27,7 +20,7 @@ class MlserverPredictor:
     def __init__(
         self,
         mlserver_base_url: str,
-        mlserver_model_name: Str,
+        mlserver_model_name: str,
         feature_extractor: AbstractFeatureExtractor,
         prediction_destination: AbstractPredictionDestination,
     ) -> None:
@@ -67,7 +60,7 @@ class MlserverPredictor:
             )
         return prediction_records
 
-    def predict(self) -> Sequence[PredictionRecord]:
+    def predict(self) -> None:
         features = self.feature_extractor.extract()
         predictions = self._call_model(features)
         self.prediction_destination.write(predictions)

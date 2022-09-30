@@ -4,13 +4,12 @@ from random import uniform
 
 import pytest
 
-import mlserver_inference_pipeline.predict as predict
 from mlserver_inference_pipeline.destinations.csv import CsvPredictionDestination
-from mlserver_inference_pipeline.models import FeatureRecord, PredictionRecord
+from mlserver_inference_pipeline.models import PredictionRecord
 
 
 @pytest.fixture
-def dummy_prediction_set():
+def dummy_prediction_set() -> list[PredictionRecord]:
     return [
         PredictionRecord(
             input_ref=i,

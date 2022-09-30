@@ -25,7 +25,7 @@ import mlserver_inference_pipeline.models as models
         },
     ],
 )
-def test_create_prediction_object(inputs: list[dict]):
+def test_create_prediction_object(inputs: dict):
     models.PredictionRecord(**inputs)
 
 
@@ -38,5 +38,5 @@ def test_create_prediction_object(inputs: list[dict]):
         },
     ],
 )
-def test_create_featureset_object(inputs: list[dict]):
+def test_create_featureset_object(inputs: dict):
     models.FeatureSet(**inputs)
