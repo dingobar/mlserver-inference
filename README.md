@@ -21,6 +21,10 @@ MlserverPredictor(
 ).predict()
 ```
 
+## Is this done?
+
+Very much a WIP or PoC project.
+
 ## Extractors
 
 Connectors that get features from a datastore are referred to as Extractors. An extractor must
