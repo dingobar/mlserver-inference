@@ -16,8 +16,8 @@ class CsvPredictionDestinationConfig(BaseSettings):
 
 
 class CsvPredictionDestination(AbstractPredictionDestination):
-    def __init__(self) -> None:
-        self.config = CsvPredictionDestinationConfig()
+    def __init__(self, **kwargs) -> None:
+        self.config = CsvPredictionDestinationConfig(**kwargs)
 
     def write(self, predictions: Sequence[PredictionRecord]) -> None:
         with open(self.config.outpath, "w") as f:

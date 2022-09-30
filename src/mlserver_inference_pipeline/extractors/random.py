@@ -24,8 +24,8 @@ class RandomFeatureExtractorConfig(BaseSettings):
 
 
 class RandomFeatureExtractor(AbstractFeatureExtractor):
-    def __init__(self) -> None:
-        self.config = RandomFeatureExtractorConfig()
+    def __init__(self, **kwargs) -> None:
+        self.config = RandomFeatureExtractorConfig(**kwargs)
         random.seed(self.config.seed)
 
     def extract(self) -> FeatureSet:
